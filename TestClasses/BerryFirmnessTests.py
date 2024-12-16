@@ -23,6 +23,9 @@ class BerryFirmnessTests(BasePokeAPIClass):
         self.assertEqual(response.status_code, 404)
 
     def test_get_berry_firmness_against_berryfirmnessclass(self):
+        """This is where I test if the berry firmness I get from the API is a valid BerryFirmness object"""
+        """I got the JSON from the docs and created a class to match it"""
+        """If a field is not present, or does not comply with the type specified in the class, it will raise an error, this error will be caught and logged"""
         try:
             response = requests.get(f"{self.BASE_URL}/berry-firmness/{self.TEST_BERRY_FIRMNESS_ID}")
             firmness_data = response.json()
@@ -34,6 +37,8 @@ class BerryFirmnessTests(BasePokeAPIClass):
             raise e
 
     def test_get_limit_berry_firmness_length(self):
+        """This is where I test if the limit parameter works"""
+        """I'm using a random number between 1 and 5, because there are only 5 berry firmnesses"""
         random_id = random.randint(1, 5)
         response = requests.get(f"{self.BASE_URL}/berry-firmness/?limit={random_id}")
         firmness_data = response.json()

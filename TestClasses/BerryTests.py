@@ -19,6 +19,9 @@ class BerryTests(BasePokeAPIClass):
         self.assertEqual(berry_data['id'], self.TEST_BERRY_ID)
 
     def test_get_single_berry_against_berrytestclass(self):
+        """This is where I test if the berry I get from the API is a valid Berry object"""
+        """I got the JSON from the docs and created a class to match it"""
+        """If a field is not present, or does not comply with the type specified in the class, it will raise an error, this error will be caught and logged"""
         try:
             response = requests.get(f"{self.BASE_URL}/berry/{self.TEST_BERRY_ID}")
             berry_data = response.json()
@@ -30,6 +33,8 @@ class BerryTests(BasePokeAPIClass):
             raise e
     
     def test_get_x_limit_berries_length(self):
+        """This is where I test if the limit parameter works"""
+        """I'm using a random number between 1 and 64, because there are 64 berries"""
         random_id = random.randint(1, 64)
         response = requests.get(f"{self.BASE_URL}/berry/?limit={random_id}")
         berry_data = response.json()
