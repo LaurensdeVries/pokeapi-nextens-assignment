@@ -14,6 +14,7 @@ class Language(BaseModel):
     language: NameUrl
 
 class BerryFlavor(BaseModel):
+    """Pydantic model for Berry Flavor data, all fields are required by default"""
     id: int
     name: str
     berries: List[BerryReference]

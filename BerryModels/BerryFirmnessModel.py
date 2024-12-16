@@ -12,8 +12,8 @@ class Berry(BaseModel):
     name: str
     url: HttpUrl
 
-class BerryFirmnessTest(BaseModel):
-    """Pydantic model for Berry data, all fields are required by default"""
+class BerryFirmness(BaseModel):
+    """Pydantic model for Berry Firmness data, all fields are required by default"""
     id: int
     name: str
     berries: list[Berry]
