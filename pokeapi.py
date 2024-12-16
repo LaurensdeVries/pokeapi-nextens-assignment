@@ -53,7 +53,7 @@ class PokeAPITests(unittest.TestCase):
         self._check_response_headers(response)
 
     def test_get_pokemon_and_verify_existence_of_abilities_and_cries(self):
-        """Testing if Pokemon API response contains all required headers with correct values"""
+        """Testing if Pokemon API response contains the required fields with correct values"""
         response = requests.get(f"{self.BASE_URL}/pokemon/{self.TEST_POKEMON}")
         self.assertIn('abilities', response.json())
         self.assertIn('cries', response.json())
@@ -67,18 +67,20 @@ class PokeAPITests(unittest.TestCase):
 
     #Berry tests
     def test_get_single_berry_by_name(self):
+        """Test if the berry data contains the correct name when getting a berry by name"""
         response = requests.get(f"{self.BASE_URL}/berry/{self.TEST_BERRY}")
         berry_data = response.json()
         self.assertEqual(berry_data['name'], self.TEST_BERRY, f"Expected berry name to be {self.TEST_BERRY} but got {berry_data['name']}")
     
     def test_get_single_berry_by_id(self):
+        """Test if the berry data contains the correct id when getting a berry by id"""
         response = requests.get(f"{self.BASE_URL}/berry/{self.TEST_BERRY_ID}")
         berry_data = response.json()
         self.assertEqual(berry_data['id'], self.TEST_BERRY_ID, f"Expected berry id to be {self.TEST_BERRY_ID} but got {berry_data['id']}")
 
     def test_get_single_berry_against_berrytestclass(self):
         """Test if the berry data can be parsed into the BerryTestClass"""
-        """Because we are only asserting that it's not none - some extra errorhandling is needed while parsing the data onto the berry class"""
+        """Because we are only asserting that the data is not none - some extra errorhandling is needed while parsing the data onto the berry class"""
         """https://bulbapedia.bulbagarden.net/wiki/Category:Berries"""
         try:
             response = requests.get(f"{self.BASE_URL}/berry/{self.TEST_BERRY_ID}")
@@ -99,7 +101,7 @@ class PokeAPITests(unittest.TestCase):
         self.assertEqual(len(berry_data['results']), random_id, f"Expected {random_id} berries but got {len(berry_data['results'])}")   
     
     def test_get_nonexistent_berry_returns_404(self):
-        """Test non-existent berry response"""
+        """Test non-existent berry response and verify the status code"""
         response = requests.get(f"{self.BASE_URL}/berry/9000")
         self.assertEqual(response.status_code, 404, "Expected status code 404 for fake berry")
 
@@ -110,11 +112,13 @@ class PokeAPITests(unittest.TestCase):
 
     #Berry firmness tests
     def test_get_single_berry_firmness_by_name(self):
+        """Test if the berry firmness data contains the correct name when getting a berry firmness by name"""
         response = requests.get(f"{self.BASE_URL}/berry-firmness/{self.TEST_BERRY_FIRMNESS}")
         berry_firmness_data = response.json()
         self.assertEqual(berry_firmness_data['name'], self.TEST_BERRY_FIRMNESS, f"Expected berry firmness name to be {self.TEST_BERRY_FIRMNESS} but got {berry_firmness_data['name']}")
 
     def test_get_single_berry_firmness_by_id(self):
+        """Test if the berry firmness data contains the correct id when getting a berry firmness by id"""
         response = requests.get(f"{self.BASE_URL}/berry-firmness/{self.TEST_BERRY_FIRMNESS_ID}")
         berry_firmness_data = response.json()
         self.assertEqual(berry_firmness_data['id'], self.TEST_BERRY_FIRMNESS_ID, f"Expected berry firmness id to be {self.TEST_BERRY_FIRMNESS_ID} but got {berry_firmness_data['id']}")
@@ -122,7 +126,7 @@ class PokeAPITests(unittest.TestCase):
     def test_get_single_berry_firmness_against_berryfirmnesstestclass(self):
         """Test if the berry firmness data can be parsed into the BerryFirmnessTestClass"""
         """https://bulbapedia.bulbagarden.net/wiki/Category:Berries_by_firmness"""
-        """Because we are only asserting that it's not none - some extra errorhandling is needed while parsing the data onto the berry class"""
+        """Because we are only asserting that the data is not none - some extra errorhandling is needed while parsing the data onto the berry class"""
         try:
             response = requests.get(f"{self.BASE_URL}/berry-firmness/{self.TEST_BERRY_FIRMNESS_ID}")
             berry_firmness_data = response.json()
@@ -153,11 +157,13 @@ class PokeAPITests(unittest.TestCase):
     
     #Berry flavor tests
     def test_get_single_berry_flavor_by_name(self):
+        """Test if the berry flavor data contains the correct name when getting a berry flavor by name"""
         response = requests.get(f"{self.BASE_URL}/berry-flavor/{self.TEST_BERRY_FLAVOR}")
         berry_flavor_data = response.json()
         self.assertEqual(berry_flavor_data['name'], self.TEST_BERRY_FLAVOR, f"Expected berry flavor name to be {self.TEST_BERRY_FLAVOR} but got {berry_flavor_data['name']}")
 
     def test_get_single_berry_flavor_by_id(self):
+        """Test if the berry flavor data contains the correct id when getting a berry flavor by id"""
         response = requests.get(f"{self.BASE_URL}/berry-flavor/{self.TEST_BERRY_FLAVOR_ID}")
         berry_flavor_data = response.json()
         self.assertEqual(berry_flavor_data['id'], self.TEST_BERRY_FLAVOR_ID, f"Expected berry flavor id to be {self.TEST_BERRY_FLAVOR_ID} but got {berry_flavor_data['id']}")
@@ -165,7 +171,7 @@ class PokeAPITests(unittest.TestCase):
     def test_get_single_berry_flavor_against_berryflavorstestclass(self):
         """Test if the berry flavor data can be parsed into the BerryFlavorTestClass"""
         """https://bulbapedia.bulbagarden.net/wiki/Flavor"""
-        """Because we are only asserting that it's not none - some extra errorhandling is needed while parsing the data onto the berry class"""
+        """Because we are only asserting that the data is not none - some extra errorhandling is needed while parsing the data onto the berry class"""
         try:
             response = requests.get(f"{self.BASE_URL}/berry-flavor/{self.TEST_BERRY_FLAVOR_ID}")
             berry_flavor_data = response.json()
@@ -239,7 +245,7 @@ if __name__ == '__main__':
     # Create and configure the runner
     runner = unittest.TextTestRunner(
         verbosity=2,  # Detailed output
-        stream=sys.stdout,  # Uses sys.stderr by default
+        stream=sys.stdout,
         descriptions=True,
         failfast=False
     )
