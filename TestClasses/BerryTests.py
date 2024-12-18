@@ -35,10 +35,10 @@ class BerryTests(BasePokeAPIClass):
     def test_get_x_limit_berries_length(self):
         """This is where I test if the limit parameter works"""
         """I'm using a random number between 1 and 64, because there are 64 berries"""
-        random_id = random.randint(1, 64)
-        response = requests.get(f"{self.BASE_URL}/berry/?limit={random_id}")
+        random_limit = random.randint(0, 64)
+        response = requests.get(f"{self.BASE_URL}/berry/?limit={random_limit}")
         berry_data = response.json()
-        self.assertEqual(len(berry_data['results']), random_id)
+        self.assertEqual(len(berry_data['results']), random_limit)
     
     def test_get_nonexistent_berry_returns_404(self):
         response = requests.get(f"{self.BASE_URL}/berry/9000")

@@ -39,10 +39,10 @@ class BerryFirmnessTests(BasePokeAPIClass):
     def test_get_limit_berry_firmness_length(self):
         """This is where I test if the limit parameter works"""
         """I'm using a random number between 1 and 5, because there are only 5 berry firmnesses"""
-        random_id = random.randint(1, 5)
-        response = requests.get(f"{self.BASE_URL}/berry-firmness/?limit={random_id}")
+        random_limit = random.randint(1, 5)
+        response = requests.get(f"{self.BASE_URL}/berry-firmness/?limit={random_limit}")
         firmness_data = response.json()
-        self.assertEqual(len(firmness_data['results']), random_id)
+        self.assertEqual(len(firmness_data['results']), random_limit)
 
     def test_get_berry_firmness_response_time_under_500ms(self):
         response = requests.get(f"{self.BASE_URL}/berry-firmness/{self.TEST_BERRY_FIRMNESS}")

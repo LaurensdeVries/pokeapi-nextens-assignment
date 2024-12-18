@@ -39,10 +39,10 @@ class BerryFlavorTests(BasePokeAPIClass):
     def test_get_limit_berry_flavor_length(self):
         """This is where I test if the limit parameter works"""
         """I'm using a random number between 1 and 5, because there are only 5 berry flavors"""
-        random_id = random.randint(1, 5)
-        response = requests.get(f"{self.BASE_URL}/berry-flavor/?limit={random_id}")
+        random_limit = random.randint(1, 5)
+        response = requests.get(f"{self.BASE_URL}/berry-flavor/?limit={random_limit}")
         flavor_data = response.json()
-        self.assertEqual(len(flavor_data['results']), random_id)
+        self.assertEqual(len(flavor_data['results']), random_limit)
 
     def test_get_berry_flavor_response_time_under_500ms(self):
         response = requests.get(f"{self.BASE_URL}/berry-flavor/{self.TEST_BERRY_FLAVOR}")
